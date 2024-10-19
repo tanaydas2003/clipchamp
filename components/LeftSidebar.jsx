@@ -16,20 +16,18 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
     setSelectedMediaType(mediaType);
   };
 
-  // Background color for selected item (matching drag and drop area)
-  const selectedBgColor = '#444'; // Adjust as needed to match drag and drop area
+  const selectedBgColor = '#444'; 
 
-  // Styles for the ListItem
   const listItemStyles = (mediaType) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center', // Center content vertically
+    justifyContent: 'center',
     padding: 0,
     backgroundColor: selectedMediaType === mediaType ? selectedBgColor : 'transparent',
-    height: selectedMediaType === mediaType ? '80px' : '70px', // Increase height when selected
+    height: selectedMediaType === mediaType ? '80px' : '70px', 
     transition: 'height 0.2s, background-color 0.2s',
-    borderRadius: '10px', // Add border radius for a smoother look
+    borderRadius: '10px', 
   });
 
   const iconStyles = {
@@ -48,8 +46,6 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
   return (
     <Box sx={{ backgroundColor: '#34344a', width: '80px', height: '100vh', paddingTop: '20px', color: '#fff' }}>
       <List sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-        
-        {/* Your media */}
         <ListItem
           button
           onClick={() => handleItemClick('media')}
