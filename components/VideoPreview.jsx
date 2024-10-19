@@ -1,18 +1,15 @@
 'use client';
-
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
 
 const VideoPreview = () => {
   const [previewMedia, setPreviewMedia] = useState(null);
 
-  // Handle drag over event
   const handleDragOver = (event) => {
     event.preventDefault();
     event.stopPropagation();
   };
 
-  // Handle drop event
   const handleDrop = (event) => {
     event.preventDefault();
     event.stopPropagation();
