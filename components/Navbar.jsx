@@ -7,15 +7,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'; // For Upgrade Icon
-import UploadIcon from '@mui/icons-material/Upload'; // For Export Icon
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import UploadIcon from '@mui/icons-material/Upload';
 import Box from '@mui/material/Box';
 
 const Navbar = () => {
   return (
     <AppBar position="static" color="default" sx={{ backgroundColor: '#1a1a2e', color: '#fff' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        {/* Hamburger Menu Icon on the far left */}
         <IconButton
           edge="start"
           color="inherit"
@@ -24,42 +23,34 @@ const Navbar = () => {
         >
           <MenuIcon />
         </IconButton>
-
-        {/* Flexbox container for Clipchamp and Untitled Video, right of the menu */}
         <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, ml: 2 }}>
-          {/* Clipchamp Logo / App Name */}
           <Typography
             variant="h6"
             component="div"
             sx={{
               display: 'flex',
               alignItems: 'center',
-              fontSize: { xs: '0.8rem', sm: '1.2rem', md: '1.5rem' }, // Responsive font size
+              fontSize: { xs: '0.8rem', sm: '1.2rem', md: '1.5rem' }, 
               mr: 2,
             }}
           >
             DHANUR AI
           </Typography>
-
-          {/* Untitled Video Button */}
           <Box
             component="div"
             sx={{
-              display: { xs: 'none', md: 'flex' }, // Hidden on mobile, visible on desktop
+              display: { xs: 'none', md: 'flex' }, 
               backgroundColor: '#2a2a3e',
               border: '1px solid #444',
               borderRadius: '5px',
-              padding: { xs: '3px 10px', sm: '5px 15px', md: '5px 20px' }, // Responsive padding
-              fontSize: { xs: '0.7rem', sm: '0.9rem', md: '1rem' }, // Responsive font size
+              padding: { xs: '3px 10px', sm: '5px 15px', md: '5px 20px' },
+              fontSize: { xs: '0.7rem', sm: '0.9rem', md: '1rem' },
             }}
           >
             <Button color="inherit" style={{ color: '#fff', fontSize: 'inherit' }}>Untitled video</Button>
           </Box>
         </Box>
-
-        {/* Upgrade, Export, Notification, Profile Icons */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {/* Upgrade Button */}
           <Box
             component="div"
             sx={{
@@ -68,7 +59,7 @@ const Navbar = () => {
               border: '1px solid #444',
               borderRadius: '5px',
               padding: { xs: '3px 10px', sm: '5px 15px', md: '5px 20px' },
-              mr: 1, // Reduced margin
+              mr: 1,
               fontSize: { xs: '0.7rem', sm: '0.9rem', md: '1rem' },
             }}
           >
@@ -76,8 +67,6 @@ const Navbar = () => {
               Upgrade
             </Button>
           </Box>
-
-          {/* Export Button */}
           <Box
             component="div"
             sx={{
@@ -85,7 +74,7 @@ const Navbar = () => {
               border: '1px solid #444',
               borderRadius: '5px',
               padding: { xs: '3px 10px', sm: '5px 15px', md: '5px 20px' },
-              mr: 1, // Reduced margin
+              mr: 1,
               fontSize: { xs: '0.7rem', sm: '0.9rem', md: '1rem' },
             }}
           >
@@ -93,16 +82,12 @@ const Navbar = () => {
               Export
             </Button>
           </Box>
-
-          {/* Notifications Icon */}
           <IconButton
             color="inherit"
-            sx={{ display: { xs: 'none', md: 'flex' }, fontSize: { xs: 'small', sm: 'medium', md: 'large' }, mr: 1 }} // Reduced margin
+            sx={{ display: { xs: 'none', md: 'flex' }, fontSize: { xs: 'small', sm: 'medium', md: 'large' }, mr: 1 }}
           >
             <NotificationsIcon />
           </IconButton>
-
-          {/* Profile Icon */}
           <IconButton
             edge="end"
             color="inherit"
