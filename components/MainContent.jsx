@@ -2,20 +2,17 @@
 
 import React, { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'; // For video
-import MusicNoteIcon from '@mui/icons-material/MusicNote'; // For music
-import ImageIcon from '@mui/icons-material/Image'; // For images
-import GifIcon from '@mui/icons-material/Gif'; // For GIFs
-import VideoPreview from './VideoPreview'; // Importing the VideoPreview component
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'; 
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import ImageIcon from '@mui/icons-material/Image';
+import GifIcon from '@mui/icons-material/Gif';
+import VideoPreview from './VideoPreview';
 
 const MainContent = ({ selectedMediaType }) => {
   const [uploadedFiles, setUploadedFiles] = useState({
     image: [],
     gif: [],
-    // Add other media types if needed
   });
-
-  // Function to handle file input
   const handleFileInput = (event) => {
     const files = Array.from(event.target.files);
     if (files && files.length > 0) {
@@ -26,10 +23,9 @@ const MainContent = ({ selectedMediaType }) => {
     }
   };
 
-  // Function to handle drag and drop
   const handleDrop = (event) => {
     event.preventDefault();
-    event.stopPropagation(); // Prevent event from bubbling up
+    event.stopPropagation(); 
     const files = Array.from(event.dataTransfer.files);
     if (files && files.length > 0) {
       setUploadedFiles((prevFiles) => ({
@@ -41,15 +37,11 @@ const MainContent = ({ selectedMediaType }) => {
 
   const handleDragOver = (event) => {
     event.preventDefault();
-    event.stopPropagation(); // Prevent event from bubbling up
+    event.stopPropagation();
   };
-
-  // Function to handle import button click
   const handleImportClick = () => {
     document.getElementById('file-input').click();
   };
-
-  // Determine the import button text and accepted file types based on selectedMediaType
   let importButtonText = 'Import media';
   let acceptedFileTypes = 'video/*,audio/*,image/*';
 
@@ -60,10 +52,8 @@ const MainContent = ({ selectedMediaType }) => {
     importButtonText = 'Import GIF';
     acceptedFileTypes = 'image/gif';
   }
-
-  // Determine the backgroundColor and height for drag and drop area
   const dragDropBgColor = selectedMediaType === 'image' || selectedMediaType === 'gif' ? '#444' : '#262626';
-  const dragDropHeight = selectedMediaType ? '500px' : 'auto'; // Increase height when a media type is selected
+  const dragDropHeight = selectedMediaType ? '500px' : 'auto';
 
   return (
     <Box sx={{ padding: 2, display: 'flex', flexDirection: 'row', gap: 2, height: '100vh' }}>
@@ -71,9 +61,9 @@ const MainContent = ({ selectedMediaType }) => {
       {/* Left Side (Media Import Section) */}
       <Box
         sx={{
-          flex: '0 0 250px', // Fixed width to create a narrow left section
-          backgroundColor: '#262626', // Dark background
-          borderRadius: '10px', // Rounded corners
+          flex: '0 0 250px', 
+          backgroundColor: '#262626', 
+          borderRadius: '10px', 
           padding: 2,
           display: 'flex',
           flexDirection: 'column',
@@ -120,7 +110,6 @@ const MainContent = ({ selectedMediaType }) => {
           onDragOver={handleDragOver}
         >
           {uploadedFiles[selectedMediaType] && uploadedFiles[selectedMediaType].length > 0 ? (
-            // Show the uploaded files for the selected media type
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {uploadedFiles[selectedMediaType].map((file, index) => (
                 <Box key={index}>
