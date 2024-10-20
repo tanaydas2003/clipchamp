@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { Box, List, ListItem, ListItemIcon, Typography } from '@mui/material';
-import VideoLibraryIcon from '@mui/icons-material/VideoLibrary'; // Your media
-import ImageIcon from '@mui/icons-material/Image'; // Image Upload
-import GifIcon from '@mui/icons-material/Gif'; // GIF Upload
-import CameraAltIcon from '@mui/icons-material/CameraAlt'; // Record & Create
-import FolderOpenIcon from '@mui/icons-material/FolderOpen'; // Content Library
-import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark'; // Templates
-import TextFieldsIcon from '@mui/icons-material/TextFields'; // Text
-import MovieFilterIcon from '@mui/icons-material/MovieFilter'; // Transitions
+import VideoLibraryIcon from '@mui/icons-material/VideoLibrary'; 
+import ImageIcon from '@mui/icons-material/Image'; 
+import GifIcon from '@mui/icons-material/Gif'; 
+import CameraAltIcon from '@mui/icons-material/CameraAlt'; 
+import FolderOpenIcon from '@mui/icons-material/FolderOpen'; 
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark'; 
+import TextFieldsIcon from '@mui/icons-material/TextFields'; 
+import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 
 const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
   const handleItemClick = (mediaType) => {
