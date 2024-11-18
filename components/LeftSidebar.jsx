@@ -1,28 +1,25 @@
 'use client';
-
 import React from 'react';
 import { Box, List, ListItem, ListItemIcon, Typography } from '@mui/material';
-import VideoLibraryIcon from '@mui/icons-material/VideoLibrary'; 
+import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import ImageIcon from '@mui/icons-material/Image'; 
 import GifIcon from '@mui/icons-material/Gif'; 
 import CameraAltIcon from '@mui/icons-material/CameraAlt'; 
 import FolderOpenIcon from '@mui/icons-material/FolderOpen'; 
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark'; 
 import TextFieldsIcon from '@mui/icons-material/TextFields'; 
-import MovieFilterIcon from '@mui/icons-material/MovieFilter';
+import MovieFilterIcon from '@mui/icons-material/MovieFilter'; 
 
 const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
   const handleItemClick = (mediaType) => {
     setSelectedMediaType(mediaType);
   };
-
   const selectedBgColor = '#444'; 
-
   const listItemStyles = (mediaType) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center', 
     padding: 0,
     backgroundColor: selectedMediaType === mediaType ? selectedBgColor : 'transparent',
     height: selectedMediaType === mediaType ? '80px' : '70px', 
@@ -46,8 +43,10 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
   return (
     <Box sx={{ backgroundColor: '#34344a', width: '80px', height: '100vh', paddingTop: '20px', color: '#fff' }}>
       <List sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+        
+        {/* Your media */}
         <ListItem
-          button
+          button={true} 
           onClick={() => handleItemClick('media')}
           sx={listItemStyles('media')}
         >
@@ -59,7 +58,7 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
 
         {/* Image Upload */}
         <ListItem
-          button
+          button={true} 
           onClick={() => handleItemClick('image')}
           sx={listItemStyles('image')}
         >
@@ -71,7 +70,7 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
 
         {/* GIF Upload */}
         <ListItem
-          button
+          button={true}
           onClick={() => handleItemClick('gif')}
           sx={listItemStyles('gif')}
         >
@@ -83,7 +82,7 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
 
         {/* Record & Create */}
         <ListItem
-          button
+          button={true} 
           onClick={() => handleItemClick('record')}
           sx={listItemStyles('record')}
         >
@@ -95,7 +94,7 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
 
         {/* Content Library */}
         <ListItem
-          button
+          button={true} 
           onClick={() => handleItemClick('content')}
           sx={listItemStyles('content')}
         >
@@ -107,7 +106,7 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
 
         {/* Templates */}
         <ListItem
-          button
+          button={true} 
           onClick={() => handleItemClick('templates')}
           sx={listItemStyles('templates')}
         >
@@ -119,7 +118,7 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
 
         {/* Text */}
         <ListItem
-          button
+          button={true} 
           onClick={() => handleItemClick('text')}
           sx={listItemStyles('text')}
         >
@@ -131,7 +130,7 @@ const LeftSidebar = ({ selectedMediaType, setSelectedMediaType }) => {
 
         {/* Transitions */}
         <ListItem
-          button
+          button={true}
           onClick={() => handleItemClick('transitions')}
           sx={listItemStyles('transitions')}
         >
