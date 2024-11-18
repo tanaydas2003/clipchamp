@@ -2,48 +2,109 @@
 
 import React, { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'; 
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import ImageIcon from '@mui/icons-material/Image';
-import GifIcon from '@mui/icons-material/Gif';
-import VideoPreview from './VideoPreview';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'; // For video
+import MusicNoteIcon from '@mui/icons-material/MusicNote'; // For music
+import ImageIcon from '@mui/icons-material/Image'; // For images
+import GifIcon from '@mui/icons-material/Gif'; // For GIFs
+import VideoPreview from './VideoPreview'; // Importing the VideoPreview component
 
 const MainContent = ({ selectedMediaType }) => {
   const [uploadedFiles, setUploadedFiles] = useState({
     image: [],
     gif: [],
+    media: [], // Add media array for videos
+    // Add other media types if needed
   });
+
+  const [previewFile, setPreviewFile] = useState(null); // New state for preview file
+  const [draggedFile, setDraggedFile] = useState(null); // New state for tracking dragged file
+
+  // Define accepted types for each media type
+  const acceptedTypes = {
+    media: ['video/*'],
+    image: ['image/*'],
+    gif: ['image/gif'],
+    // Add other media types if needed
+  };
+
+  // Function to handle file input
   const handleFileInput = (event) => {
-    const files = Array.from(event.target.files);
+    let files = Array.from(event.target.files);
+
+    // Filter files based on selectedMediaType
+    const accepted = acceptedTypes[selectedMediaType] || [];
+    files = files.filter((file) =>
+      accepted.some((type) => file.type.match(type))
+    );
+
     if (files && files.length > 0) {
       setUploadedFiles((prevFiles) => ({
         ...prevFiles,
-        [selectedMediaType]: [...prevFiles[selectedMediaType], ...files],
+        [selectedMediaType]: [
+          ...(prevFiles[selectedMediaType] || []),
+          ...files,
+        ],
       }));
     }
   };
 
-  const handleDrop = (event) => {
+  // Function to handle file drag over preview area
+  const handlePreviewDrop = (event) => {
     event.preventDefault();
-    event.stopPropagation(); 
-    const files = Array.from(event.dataTransfer.files);
-    if (files && files.length > 0) {
-      setUploadedFiles((prevFiles) => ({
-        ...prevFiles,
-        [selectedMediaType]: [...prevFiles[selectedMediaType], ...files],
-      }));
+    event.stopPropagation();
+
+    if (draggedFile) {
+      setPreviewFile(draggedFile);
+      setDraggedFile(null); // Reset dragged file after drop
     }
   };
 
-  const handleDragOver = (event) => {
+  const handleDragOverPreview = (event) => {
     event.preventDefault();
     event.stopPropagation();
   };
+
+  // Function to handle drag start in import section
+  const handleDragStart = (file) => {
+    setDraggedFile(file);
+  };
+
+  // Function to handle drag and drop in import section
+  const handleDrop = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    let files = Array.from(event.dataTransfer.files);
+
+    // Filter files based on selectedMediaType
+    const accepted = acceptedTypes[selectedMediaType] || [];
+    files = files.filter((file) =>
+      accepted.some((type) => file.type.match(type))
+    );
+
+    if (files && files.length > 0) {
+      setUploadedFiles((prevFiles) => ({
+        ...prevFiles,
+        [selectedMediaType]: [
+          ...(prevFiles[selectedMediaType] || []),
+          ...files,
+        ],
+      }));
+    }
+  };
+
+  const handleDragOverImport = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  // Function to handle import button click
   const handleImportClick = () => {
     document.getElementById('file-input').click();
   };
-  let importButtonText = 'Import media';
-  let acceptedFileTypes = 'video/*,audio/*,image/*';
+
+  // Determine the import button text and accepted file types based on selectedMediaType
+  let importButtonText = 'Import Media';
+  let acceptedFileTypes = 'video/*';
 
   if (selectedMediaType === 'image') {
     importButtonText = 'Import Image';
@@ -52,18 +113,20 @@ const MainContent = ({ selectedMediaType }) => {
     importButtonText = 'Import GIF';
     acceptedFileTypes = 'image/gif';
   }
-  const dragDropBgColor = selectedMediaType === 'image' || selectedMediaType === 'gif' ? '#444' : '#262626';
+
+  // Determine the backgroundColor and height for drag and drop area
+  const dragDropBgColor =
+    selectedMediaType === 'image' || selectedMediaType === 'gif' ? '#444' : '#262626';
   const dragDropHeight = selectedMediaType ? '500px' : 'auto';
 
   return (
     <Box sx={{ padding: 2, display: 'flex', flexDirection: 'row', gap: 2, height: '100vh' }}>
-      
       {/* Left Side (Media Import Section) */}
       <Box
         sx={{
-          flex: '0 0 250px', 
-          backgroundColor: '#262626', 
-          borderRadius: '10px', 
+          flex: '0 0 250px', // Fixed width to create a narrow left section
+          backgroundColor: '#262626', // Dark background
+          borderRadius: '10px', // Rounded corners
           padding: 2,
           display: 'flex',
           flexDirection: 'column',
@@ -107,16 +170,26 @@ const MainContent = ({ selectedMediaType }) => {
             height: dragDropHeight,
           }}
           onDrop={handleDrop}
-          onDragOver={handleDragOver}
+          onDragOver={handleDragOverImport}
         >
           {uploadedFiles[selectedMediaType] && uploadedFiles[selectedMediaType].length > 0 ? (
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {uploadedFiles[selectedMediaType].map((file, index) => (
-                <Box key={index}>
+                <Box
+                  key={index}
+                  draggable
+                  onDragStart={() => handleDragStart(file)}
+                >
                   {(selectedMediaType === 'image' || selectedMediaType === 'gif') ? (
                     <img
                       src={URL.createObjectURL(file)}
                       alt="Uploaded"
+                      style={{ maxWidth: '100%', maxHeight: '100%' }}
+                    />
+                  ) : selectedMediaType === 'media' && file.type.startsWith('video/') ? (
+                    <video
+                      src={URL.createObjectURL(file)}
+                      muted // Ensure video is muted in upload section
                       style={{ maxWidth: '100%', maxHeight: '100%' }}
                     />
                   ) : (
@@ -126,19 +199,21 @@ const MainContent = ({ selectedMediaType }) => {
               ))}
             </Box>
           ) : (
-            // Default drag & drop area content
             <>
-              {/* Media Icons */}
               <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
-                <PlayArrowIcon sx={{ color: '#FF4500', fontSize: 40 }} />
-                <MusicNoteIcon sx={{ color: '#FF69B4', fontSize: 40 }} />
-                <ImageIcon sx={{ color: '#32CD32', fontSize: 40 }} />
+                {selectedMediaType === 'media' && (
+                  <PlayArrowIcon sx={{ color: '#FF4500', fontSize: 40 }} />
+                )}
+                {selectedMediaType === 'image' && (
+                  <ImageIcon sx={{ color: '#32CD32', fontSize: 40 }} />
+                )}
+                {selectedMediaType === 'gif' && (
+                  <GifIcon sx={{ color: '#FFD700', fontSize: 40 }} />
+                )}
               </Box>
-
               <Typography sx={{ color: '#fff', fontWeight: 600, textAlign: 'center' }}>
-                Drag & drop media from your device to import
+                Drag & drop or import {selectedMediaType}
               </Typography>
-              <Typography sx={{ color: '#aaa', textAlign: 'center' }}>Videos, audio, images, GIFs</Typography>
             </>
           )}
         </Box>
@@ -152,9 +227,13 @@ const MainContent = ({ selectedMediaType }) => {
           justifyContent: 'center',
           alignItems: 'flex-start',
           padding: 2,
+          border: '2px dashed #444', // Add border to indicate drop area for preview
+          borderRadius: '10px',
         }}
+        onDrop={handlePreviewDrop}
+        onDragOver={handleDragOverPreview}
       >
-        <VideoPreview />
+        <VideoPreview previewFile={previewFile} />
       </Box>
     </Box>
   );
