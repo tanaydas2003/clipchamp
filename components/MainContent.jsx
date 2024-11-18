@@ -12,22 +12,16 @@ const MainContent = ({ selectedMediaType }) => {
   const [uploadedFiles, setUploadedFiles] = useState({
     image: [],
     gif: [],
-    media: [], // Add media array for videos
-    // Add other media types if needed
+    media: [], 
   });
-
-  const [previewFile, setPreviewFile] = useState(null); // New state for preview file
-  const [draggedFile, setDraggedFile] = useState(null); // New state for tracking dragged file
-
-  // Define accepted types for each media type
+  const [previewFile, setPreviewFile] = useState(null);
+  const [draggedFile, setDraggedFile] = useState(null); 
   const acceptedTypes = {
     media: ['video/*'],
     image: ['image/*'],
     gif: ['image/gif'],
-    // Add other media types if needed
   };
 
-  // Function to handle file input
   const handleFileInput = (event) => {
     let files = Array.from(event.target.files);
 
@@ -55,7 +49,7 @@ const MainContent = ({ selectedMediaType }) => {
 
     if (draggedFile) {
       setPreviewFile(draggedFile);
-      setDraggedFile(null); // Reset dragged file after drop
+      setDraggedFile(null); 
     }
   };
 
@@ -124,9 +118,9 @@ const MainContent = ({ selectedMediaType }) => {
       {/* Left Side (Media Import Section) */}
       <Box
         sx={{
-          flex: '0 0 250px', // Fixed width to create a narrow left section
-          backgroundColor: '#262626', // Dark background
-          borderRadius: '10px', // Rounded corners
+          flex: '0 0 250px',
+          backgroundColor: '#262626',
+          borderRadius: '10px', 
           padding: 2,
           display: 'flex',
           flexDirection: 'column',
@@ -189,7 +183,7 @@ const MainContent = ({ selectedMediaType }) => {
                   ) : selectedMediaType === 'media' && file.type.startsWith('video/') ? (
                     <video
                       src={URL.createObjectURL(file)}
-                      muted // Ensure video is muted in upload section
+                      muted 
                       style={{ maxWidth: '100%', maxHeight: '100%' }}
                     />
                   ) : (
@@ -227,7 +221,7 @@ const MainContent = ({ selectedMediaType }) => {
           justifyContent: 'center',
           alignItems: 'flex-start',
           padding: 2,
-          border: '2px dashed #444', // Add border to indicate drop area for preview
+          border: '2px dashed #444', 
           borderRadius: '10px',
         }}
         onDrop={handlePreviewDrop}
