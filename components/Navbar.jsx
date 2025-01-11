@@ -15,6 +15,7 @@ const Navbar = () => {
   return (
     <AppBar position="static" color="default" sx={{ backgroundColor: '#1a1a2e', color: '#fff' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        {/* Hamburger Menu Icon on the far left */}
         <IconButton
           edge="start"
           color="inherit"
@@ -23,23 +24,28 @@ const Navbar = () => {
         >
           <MenuIcon />
         </IconButton>
+
+        {/* Flexbox container for Clipchamp and Untitled Video, right of the menu */}
         <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, ml: 2 }}>
+          {/* Clipchamp Logo / App Name */}
           <Typography
             variant="h6"
             component="div"
             sx={{
               display: 'flex',
               alignItems: 'center',
-              fontSize: { xs: '0.8rem', sm: '1.2rem', md: '1.5rem' }, 
+              fontSize: { xs: '0.8rem', sm: '1.2rem', md: '1.5rem' },
               mr: 2,
             }}
           >
             DHANUR AI
           </Typography>
+
+          {/* Untitled Video Button */}
           <Box
             component="div"
             sx={{
-              display: { xs: 'none', md: 'flex' }, 
+              display: { xs: 'none', md: 'flex' },
               backgroundColor: '#2a2a3e',
               border: '1px solid #444',
               borderRadius: '5px',
@@ -50,6 +56,8 @@ const Navbar = () => {
             <Button color="inherit" style={{ color: '#fff', fontSize: 'inherit' }}>Untitled video</Button>
           </Box>
         </Box>
+
+        {/* Upgrade, Export, Notification, Profile Icons */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Box
             component="div"
@@ -59,7 +67,7 @@ const Navbar = () => {
               border: '1px solid #444',
               borderRadius: '5px',
               padding: { xs: '3px 10px', sm: '5px 15px', md: '5px 20px' },
-              mr: 1,
+              mr: 1, // Reduced margin
               fontSize: { xs: '0.7rem', sm: '0.9rem', md: '1rem' },
             }}
           >
@@ -67,6 +75,8 @@ const Navbar = () => {
               Upgrade
             </Button>
           </Box>
+
+          {/* Export Button */}
           <Box
             component="div"
             sx={{
@@ -82,12 +92,16 @@ const Navbar = () => {
               Export
             </Button>
           </Box>
+
+          {/* Notifications Icon */}
           <IconButton
             color="inherit"
-            sx={{ display: { xs: 'none', md: 'flex' }, fontSize: { xs: 'small', sm: 'medium', md: 'large' }, mr: 1 }}
+            sx={{ display: { xs: 'none', md: 'flex' }, fontSize: { xs: 'small', sm: 'medium', md: 'large' }, mr: 1 }} // Reduced margin
           >
             <NotificationsIcon />
           </IconButton>
+
+          {/* Profile Icon */}
           <IconButton
             edge="end"
             color="inherit"
