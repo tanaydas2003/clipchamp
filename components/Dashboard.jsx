@@ -7,16 +7,25 @@ import MainContent from './MainContent';
 import RightSidebar from './RightSidebar';
 
 const Dashboard = () => {
-  const [selectedMediaType, setSelectedMediaType] = useState('media'); // Default to 'media'
+  const [selectedMediaType, setSelectedMediaType] = useState('media');
+  const [selectedFilter, setSelectedFilter] = useState('none');
 
   return (
     <Box sx={{ display: 'flex', height: '100vh', backgroundColor: '#1a1a2e' }}>
       {/* Left Sidebar */}
-      <LeftSidebar selectedMediaType={selectedMediaType} setSelectedMediaType={setSelectedMediaType} />
+      <LeftSidebar
+        selectedMediaType={selectedMediaType}
+        setSelectedMediaType={setSelectedMediaType}
+        selectedFilter={selectedFilter}
+        setSelectedFilter={setSelectedFilter}
+      />
 
       {/* Main Content */}
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <MainContent selectedMediaType={selectedMediaType} />
+        <MainContent
+          selectedMediaType={selectedMediaType}
+          selectedFilter={selectedFilter}
+        />
       </Box>
 
       {/* Right Sidebar */}
